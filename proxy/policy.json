@@ -1,0 +1,15 @@
+{
+  "tldr_mode": {
+    "enabled": false,
+    "full_page_name": "index.html",
+    "concise_page_name": "index-tldr.html"
+  },
+  "keywords": {
+    "enabled": false,
+    "maximum_occurrences": {
+      "guaranteed": 2,
+      "secret trick": 2,
+      "you won't believe": 1
+    }
+  }
+}

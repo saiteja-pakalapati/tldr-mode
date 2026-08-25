@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/style.css">
+  <title>TLDR Mode Demo</title>
+</head>
+<body>
+  <main class="card home">
+    <p class="eyebrow">PERSONAL READING MODE · PROOF OF CONCEPT</p>
+    <h1>Your interests. Your choices. Your reading mode.</h1>
+    <p class="lead">This small demo shows how one URL can behave differently according to choices stored in <code>proxy/policy.json</code>. Save a change and reload the article. The proxy reads the file on every request.</p>
+
+    <section class="demo-card">
+      <p class="step">EXAMPLE 1</p>
+      <h2>Choose the full article or its author supplied TLDR</h2>
+      <p><strong>Article context.</strong> A sports publisher has written a full story about Royal Challengers Bengaluru and has also supplied a concise version of the same story.</p>
+      <pre><code>"tldr_mode": {
+  "enabled": true
+}</code></pre>
+      <ul>
+        <li><code>false</code>, the original full article is displayed.</li>
+        <li><code>true</code>, the same URL displays the concise version supplied by the author.</li>
+      </ul>
+      <a class="button" href="/about-rcb-team/index.html">Open the RCB article</a>
+    </section>
+
+    <section class="demo-card">
+      <p class="step">EXAMPLE 2</p>
+      <h2>Skip an article that exceeds your keyword limit</h2>
+      <p><strong>Article context.</strong> A productivity article repeatedly uses promotional phrases. The policy says how many occurrences you are willing to accept.</p>
+      <pre><code>"keywords": {
+  "enabled": true,
+  "maximum_occurrences": {
+    "guaranteed": 2
+  }
+}</code></pre>
+      <ul>
+        <li><code>false</code>, the original article is displayed without evaluation.</li>
+        <li><code>true</code>, the article is skipped when a configured phrase exceeds its limit.</li>
+      </ul>
+      <a class="button" href="/examples/keyword-heavy.html">Open the productivity article</a>
+    </section>
+
+    <aside class="tip"><strong>How to test.</strong> Edit one <code>enabled</code> value in <code>proxy/policy.json</code>, save it, and reload the matching article. No proxy restart is needed.</aside>
+  </main>
+</body>
+</html>

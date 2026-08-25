@@ -1,0 +1,30 @@
+services:
+  blog:
+    image: nginx:1.27-alpine
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+    command: ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/nginx.conf"]
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+
+  tldr-proxy:
+    image: mitmproxy/mitmproxy:11.0.2
+    depends_on:
+      - blog
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./proxy:/app:ro
+    command:
+      - mitmdump
+      - --listen-host
+      - 0.0.0.0
+      - --listen-port
+      - "8080"
+      - --set
+      - block_global=false
+      - -s
+      - /app/tldr_mode.py
